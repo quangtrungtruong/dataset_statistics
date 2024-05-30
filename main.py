@@ -6,11 +6,13 @@ import pandas as pd
 import sys
 from unidecode import unidecode
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import sys
 
 
 def write_file():
     # Directory to search
-    # dir_path = '/media/qttruong/f0816220-235d-45fe-a03e-f17de2c9267b/marine_data/test_marine1'
     dir_path = '/media/qttruong/f0816220-235d-45fe-a03e-f17de2c9267b/marine_data/vimeo/underwater'
 
     # List of file extensions to search for
@@ -39,39 +41,30 @@ def write_file():
 
         json.dump(data, f)
 
+def task3(df):
+    print('Total object: ', df['Central_Object'].count() + df['Object_2'].count() + df['Object_3'].count() + df['Object_4'].count())
+    data = df['Object_2']
+    # print(data)
+    sns.histplot(data, bins=10, kde=True)
+    # Show the plot
+    plt.show()
+
 def parse_captioning_csv():
     # Check if any arguments were passed
     if len(sys.argv) > 1:
         print(f'Arguments received: {sys.argv[1:]}')
+        dir_path = sys.argv[1]
     else:
         print('No arguments were passed.')
+        dir_path = './data/mvk_caption.csv'
 
-    dir_path = sys.argv[1]
 
     # Load the CSV file
     df = pd.read_csv(dir_path, delimiter=';')
-
-    print(df.columns)
-
-    for column in df.columns:
-        # Kiểm tra nếu cột là kiểu dữ liệu chuỗi
-        if df[column].dtype == object:
-            # Duyệt qua từng hàng
-            for idx in df.index:
-                # Chuyển đổi chuỗi có dấu sang không dấu
-                if pd.isnull(df.loc[idx, column]):
-                    df.loc[idx, column] = unidecode(str(df.loc[idx, column]))
-
-    # In DataFrame
-    # non_nan_count_per_row = df.count(axis=1)
-    print(df['Video ID'])
-
-    # Convert the DataFrame to JSON
-    json_data = df.to_json(orient='records')
-
-    # Write the JSON data to a file
-    # with open('output.json', 'w') as json_file:
-    #     json_file.write(json_data)
+    return df
 
 if __name__ == '__main__':
-    parse_captioning_csv()
+    df = parse_captioning_csv()
+
+    # do task
+    task3(df)
