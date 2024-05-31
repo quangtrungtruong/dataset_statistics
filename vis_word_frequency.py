@@ -5,6 +5,9 @@ from nltk.tokenize import word_tokenize
 import nltk
 import os
 
+import numpy as np
+
+
 from utils.util import *
 
 # nltk.download("stopwords")
@@ -43,15 +46,15 @@ def main(csv_file: str, output_folder: str, top):
 
     # Create the bar chart
     plt.figure(figsize=(14, 8))
-    plt.bar(words, counts, color="skyblue")
+    plt.bar(np.arange(len(words)) * 5, counts, color="skyblue")
 
     # Add titles and labels
-    plt.title("Top 30 Most Frequent Words", fontsize=16)
+    plt.title(f"Top {top} Most Frequent Words", fontsize=16)
     plt.xlabel("Words", fontsize=14)
     plt.ylabel("Frequency", fontsize=14)
 
     # Rotate x labels to avoid overlap
-    plt.xticks(rotation=45, ha="right")
+    plt.xticks(np.arange(len(words)) * 5, words, rotation=60, ha="right")
 
     # Display the plot
     plt.tight_layout()
@@ -63,5 +66,5 @@ def main(csv_file: str, output_folder: str, top):
 if __name__ == "__main__":
     csv_file = "data/mvk_caption.csv"
     output_folder = "./figures"
-    top = 30
+    top = 80
     main(csv_file, output_folder, top)
