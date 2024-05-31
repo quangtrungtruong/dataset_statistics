@@ -22,16 +22,31 @@ def main(csv_file: str, output_folder: str):
     attributes = list(attributes_count.keys())
     counts = list(attributes_count.values())
 
+    video_count = len(csv_data)
+    percentage = [int(count / video_count * 100) for count in counts]
+
     # Creating the horizontal bar chart
     plt.figure(figsize=(10, 6))
-    plt.barh(attributes, counts, color="skyblue")
+    bars = plt.barh(attributes, counts, color="skyblue")
     plt.xlabel("Count")
     plt.ylabel("Attribute")
-    plt.title("Horizontal Bar Chart of Attribute Counts")
+    plt.title("Attribute Counts")
     plt.grid(axis="x", linestyle="--", alpha=0.7)
+    plt.subplots_adjust(left=0.3)  # Increase the left margin
+
+    # Add text at the tip of each bar
+    for bar, add_data in zip(bars, percentage):
+        plt.text(
+            bar.get_width() + 5,  # x-coordinate: bar's width + some offset
+            bar.get_y()
+            + bar.get_height()
+            / 2,  # y-coordinate: bar's y position + half the bar's height
+            f"{add_data}%",  # text to display
+            va="center",
+        )  # vertical alignment
 
     output_path = os.path.join(output_folder, "attributes_distribution.png")
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 
 if __name__ == "__main__":

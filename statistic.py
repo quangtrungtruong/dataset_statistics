@@ -44,9 +44,22 @@ def main(csv_file: str):
             if data[object] != "":
                 count += 1
         no_of_objects.append(count)
+    print(f"There are {sum(no_of_objects)} objects in total.")
     print(
         f"Average number of objects associated with a video: {sum(no_of_objects) / len(no_of_objects)}"
     )
+
+    print()
+    print("-" * 20)
+    # Count the number of non empty attributes
+    attribute_count = 0
+    for data in csv_data:
+        count = 0
+        for attribute in ATTRIBUTES:
+            if data[attribute] != "":
+                count += 1
+        attribute_count += count
+    print(f"Number of non-empty attributes: {attribute_count}")
 
 
 if __name__ == "__main__":
