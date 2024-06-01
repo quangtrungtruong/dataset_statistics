@@ -34,6 +34,8 @@ ATTRIBUTES = [
     CAMERA_ANGLE,
 ]
 
+OBJECTS = [CENTRAL_OBJECT, OBJECT_2, OBJECT_3, OBJECT_4]
+
 
 def is_empty(attribute):
     return attribute == ""
@@ -81,3 +83,21 @@ def is_simple(data):
         and is_object3_empty
         and is_object4_empty
     )
+
+
+def is_medium(data):
+    is_central_object_empty = is_empty(data[CENTRAL_OBJECT])
+    is_object2_empty = is_empty(data[OBJECT_2])
+    is_object3_empty = is_empty(data[OBJECT_3])
+    is_object4_empty = is_empty(data[OBJECT_4])
+
+    return (
+        not is_central_object_empty
+        and not is_object2_empty
+        and is_object3_empty
+        and is_object4_empty
+    )
+
+
+def is_hard(data):
+    return not (is_simple(data) or is_medium(data))
