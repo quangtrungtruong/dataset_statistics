@@ -1,5 +1,7 @@
 from utils.util import *
 
+import nltk
+
 
 def count_video(csv_data):
     return len(csv_data)
@@ -69,6 +71,17 @@ def count_hard_data(csv_data):
     return count
 
 
+def measure_avg_sentences(csv_data):
+    no_of_sentences = []
+
+    for data in csv_data:
+        caption = data[CAPTION]
+        sentences = nltk.sent_tokenize(caption)
+        no_of_sentences.append(len(sentences))
+
+    return sum(no_of_sentences) / len(no_of_sentences)
+
+
 def main(csv_file: str, train_file: str, test_file: str):
 
     csv_data = read_csv(csv_file)
@@ -103,6 +116,10 @@ def main(csv_file: str, train_file: str, test_file: str):
     assert (
         video_count == simple_data_count + medium_data_count + hard_data_count
     ), f"Video count is not equal to the sum of simple, medium and hard data count"
+
+    print(
+        f"Average number of sentences in a caption: {measure_avg_sentences(csv_data)}"
+    )
 
     print(" ---- Train Dataset ---- ")
     train_data = read_csv(train_file)

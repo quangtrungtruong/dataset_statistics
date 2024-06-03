@@ -24,6 +24,36 @@ def check_no_newline_character(csv_data):
                 print(f"Newline character in {attribute} in video {data[VIDEO_ID]}")
 
 
+def check_camear_angle(csv_data):
+    for data in csv_data:
+        if is_empty(data[CAMERA_ANGLE]):
+            print(
+                f"Invalid camera angle {data[CAMERA_ANGLE]} in video {data[VIDEO_ID]}"
+            )
+
+
+def check_camera_position(csv_data):
+    for data in csv_data:
+        if is_empty(data[CAMERA_POSITION]):
+            print(
+                f"Invalid camera position {data[CAMERA_POSITION]} in video {data[VIDEO_ID]}"
+            )
+
+
+def check_environment(csv_data):
+    for data in csv_data:
+        if is_empty(data[ENVIRONMENT]):
+            print(f"Invalid environment {data[ENVIRONMENT]} in video {data[VIDEO_ID]}")
+
+
+def check_video_clarity(csv_data):
+    for data in csv_data:
+        if is_empty(data[VIDEO_CLARITY]):
+            print(
+                f"Invalid video clarity {data[VIDEO_CLARITY]} in video {data[VIDEO_ID]}"
+            )
+
+
 def main(csv_file: str):
 
     csv_data = read_csv(csv_file)
@@ -36,6 +66,18 @@ def main(csv_file: str):
 
     print("Checking for newline character")
     check_no_newline_character(csv_data)
+
+    print("Checking for camera angle")
+    check_camear_angle(csv_data)
+
+    print("Checking for camera position")
+    check_camera_position(csv_data)
+
+    print("Checking for environment")
+    check_environment(csv_data)
+
+    print("Checking for video clarity")
+    check_video_clarity(csv_data)
 
 
 if __name__ == "__main__":

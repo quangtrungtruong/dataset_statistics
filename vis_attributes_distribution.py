@@ -22,6 +22,9 @@ def main(csv_file: str, output_folder: str):
     attributes = list(attributes_count.keys())
     counts = list(attributes_count.values())
 
+    for a, v in zip(attributes, counts):
+        print(f"{a}: {v}")
+
     video_count = len(csv_data)
     percentage = [int(count / video_count * 100) for count in counts]
 

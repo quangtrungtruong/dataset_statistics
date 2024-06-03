@@ -17,6 +17,7 @@ CAMERA_ANGLE = "Camera_Angle"
 CAPTION = "Caption"
 FOLDER = "Folder"
 DIFFICULTY = "Difficulty"
+FILENAME = "Filename"
 
 ATTRIBUTES = [
     CENTRAL_OBJECT,

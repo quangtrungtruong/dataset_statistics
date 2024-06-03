@@ -44,15 +44,15 @@ def main(csv_file: str, output_folder: str):
 
     # Create the word cloud
     wordcloud = WordCloud(
-        width=800, height=400, background_color="white"
+        width=1200, height=600, background_color="white"
     ).generate_from_frequencies(word_count)
     # Display the word cloud
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
 
-    output_path = os.path.join(output_folder, f"caption_wordcloud.png")
-    plt.savefig(output_path)
+    output_path = os.path.join(output_folder, f"caption_wordcloud.pdf")
+    plt.savefig(output_path, format="pdf")
     plt.clf()
 
 
