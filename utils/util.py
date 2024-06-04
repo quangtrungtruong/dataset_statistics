@@ -18,6 +18,7 @@ CAPTION = "Caption"
 FOLDER = "Folder"
 DIFFICULTY = "Difficulty"
 FILENAME = "Filename"
+COMPLEXITY = "Complexity"
 
 ATTRIBUTES = [
     CENTRAL_OBJECT,
@@ -72,33 +73,21 @@ def write_csv(file_path: str, csv_data: list):
             writer.writerow([data[header] for header in header])
 
 
-def is_simple(data):
-    is_central_object_empty = is_empty(data[CENTRAL_OBJECT])
-    is_object2_empty = is_empty(data[OBJECT_2])
-    is_object3_empty = is_empty(data[OBJECT_3])
-    is_object4_empty = is_empty(data[OBJECT_4])
+def count_object(data):
+    count = 0
+    for obj in OBJECTS:
+        if not is_empty(data[obj]):
+            count += 1
+    return count
 
-    return (
-        not is_central_object_empty
-        and is_object2_empty
-        and is_object3_empty
-        and is_object4_empty
-    )
+
+def is_simple(data):
+    return count_object(data) == 1
 
 
 def is_medium(data):
-    is_central_object_empty = is_empty(data[CENTRAL_OBJECT])
-    is_object2_empty = is_empty(data[OBJECT_2])
-    is_object3_empty = is_empty(data[OBJECT_3])
-    is_object4_empty = is_empty(data[OBJECT_4])
-
-    return (
-        not is_central_object_empty
-        and not is_object2_empty
-        and is_object3_empty
-        and is_object4_empty
-    )
+    return count_object(data) == 2
 
 
 def is_hard(data):
-    return not (is_simple(data) or is_medium(data))
+    return count_object(data) > 2
