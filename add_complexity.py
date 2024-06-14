@@ -23,5 +23,5 @@ def main(csv_file: str):
 
 
 if __name__ == "__main__":
-    csv_file = "data/mvk_caption.csv"
+    csv_file = "data/test.csv"
     main(csv_file)

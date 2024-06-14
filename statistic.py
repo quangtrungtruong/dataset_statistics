@@ -160,6 +160,10 @@ def main(csv_file: str, train_file: str, test_file: str):
     print(" ---- Test Dataset ---- ")
     test_data = read_csv(test_file)
 
+    for data in test_data:
+        if data[VIDEO_ID] == "GreenIsland_SteelReef_Apr10_2023/0017.mp4":
+            print(data)
+
     test_data_count = count_video(test_data)
     print(f"There are {test_data_count} videos in test dataset.")
 

@@ -28,9 +28,10 @@ def main(csv_file: str):
     csv_data = remove_newline_character(csv_data)
 
     print("Write to new csv file")
-    write_csv("data/mvk_caption_refined.csv", csv_data)
+    output_path = csv_file.replace(".csv", "_processed.csv")
+    write_csv(output_path, csv_data)
 
 
 if __name__ == "__main__":
-    csv_file = "data/mvk_caption.csv"
+    csv_file = "data/test.csv"
     main(csv_file)
