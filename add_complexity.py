@@ -7,11 +7,11 @@ def main(csv_file: str):
 
     for data in csv_data:
         if is_simple(data):
-            data["complexity"] = "simple"
+            data[COMPLEXITY] = "simple"
         elif is_medium(data):
-            data["complexity"] = "medium"
+            data[COMPLEXITY] = "medium"
         elif is_hard(data):
-            data["complexity"] = "hard"
+            data[COMPLEXITY] = "hard"
         else:
             raise ValueError("Unknown complexity")
 
@@ -23,5 +23,5 @@ def main(csv_file: str):
 
 
 if __name__ == "__main__":
-    csv_file = "data/test.csv"
+    csv_file = "data/mvk_caption.csv"
     main(csv_file)
